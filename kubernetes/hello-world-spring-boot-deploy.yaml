@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world-spring-boot
+  name: hello-world-spring-boot
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-world-spring-boot
+  template:
+    metadata:
+      labels:
+        app: hello-world-spring-boot
+    spec:
+      containers:
+      - image: hello-world-spring-boot
+        name: hello-world-spring-boot
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
