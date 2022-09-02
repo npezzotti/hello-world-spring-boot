@@ -38,7 +38,7 @@ kubectl delete -f kubernetes/
 
 ## Set up APM
 * Add the Java tracer
-  * In the Dockerfile, add the following lines directly under `RUN apk add --no-cache wget`
+  * In the Dockerfile, add the following line directly under `RUN apk add --no-cache wget`
   ```
   RUN wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
   ```
@@ -151,16 +151,10 @@ helm show values datadog/datadog > values.yaml
     datadog:
       apm:
         portEnabled: true
-        enabled: true
       dogstatsd:
         useHostPort: true
     ```
-  * UDS:
-    ```
-    datadog:
-      apm:
-        enabled: true
-    ```
+  * UDS: no changes required
 * Install the Datadog release:
 ```
 helm install datadog -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog --set targetSystem=linux
@@ -173,6 +167,7 @@ kubectl apply -f kubernetes/
 ```
  minikube service hello-world-spring-boot 
  ```
+* Check Datadog account for traces (query for `env:test service:hello-world-spring-boot`)
 ## Clean Up
 ```
 minikube delete
