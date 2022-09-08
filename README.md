@@ -153,6 +153,8 @@ helm show values datadog/datadog > values.yaml
         portEnabled: true
       dogstatsd:
         useHostPort: true
+      kubelet:
+        tlsVerify: false
     ```
   * UDS: no changes required
 * Install the Datadog release:
